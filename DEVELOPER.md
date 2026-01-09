@@ -22,14 +22,23 @@
 ├── models.py             # レコード定義（フィールド長、固定値等）
 ├── utils.py              # 入力パース、バリデーション、ファイル書き込み
 ├── test_formatter.py     # テストスクリプト
-├── build_exe.bat         # Windowsビルドスクリプト（標準）
-├── build_exe_simple.bat  # Windowsビルドスクリプト（簡易版・初心者向け）
+├── build_exe_en.bat      # Windowsビルドスクリプト（英語版）
+├── test_simple.bat       # バッチファイル動作テスト
 ├── build_exe.sh          # Linux/Macビルドスクリプト
+├── convert_to_sjis.sh    # 文字コード変換スクリプト
 ├── requirements.txt      # 依存パッケージ
 ├── README.txt           # 利用者向けマニュアル
+├── BUILD_GUIDE_EN.txt   # ビルド手順書（英語版）
 ├── DEVELOPER.md         # 開発者向けドキュメント（このファイル）
 └── .gitignore           # Git除外設定
 ```
+
+## 主要な設定
+
+### カード発行会社コード
+- **固定値**: `7130754`
+- GUIから入力欄を削除し、コード内で固定値を使用
+- 変更が必要な場合は `app.py:112` の値を変更してください
 
 ## 開発環境のセットアップ
 

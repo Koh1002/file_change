@@ -11,7 +11,6 @@ from formatter import FixedLengthFormatter
 from utils import (
     parse_input_text,
     validate_data_list,
-    validate_company_code,
     write_shift_jis_file,
     ValidationError
 )
@@ -41,19 +40,6 @@ class FixedLengthConverterApp:
 
     def create_tab_ui(self, parent, tab_type):
         """タブのUIを作成"""
-        # カード発行会社コード入力
-        frame_company = ttk.LabelFrame(parent, text='カード発行会社コード', padding=10)
-        frame_company.pack(fill='x', padx=10, pady=10)
-
-        ttk.Label(
-            frame_company,
-            text='7桁の半角数字（未入力の場合は0000000）:'
-        ).pack(side='left', padx=5)
-
-        company_entry = ttk.Entry(frame_company, width=15)
-        company_entry.pack(side='left', padx=5)
-        company_entry.insert(0, '0000000')
-
         # データ入力エリア
         frame_input = ttk.LabelFrame(parent, text='データ入力', padding=10)
         frame_input.pack(fill='both', expand=True, padx=10, pady=10)
@@ -99,7 +85,6 @@ class FixedLengthConverterApp:
             text='ファイルを生成',
             command=lambda: self.generate_file(
                 tab_type,
-                company_entry.get(),
                 text_area.get('1.0', 'end')
             ),
             style='Accent.TButton'
@@ -119,14 +104,11 @@ class FixedLengthConverterApp:
         text_area.delete('1.0', 'end')
         text_area.insert('1.0', sample_data)
 
-    def generate_file(self, format_type, company_code, input_text):
+    def generate_file(self, format_type, input_text):
         """ファイルを生成"""
         try:
-            # カード発行会社コードのバリデーション
-            if not company_code or not company_code.strip():
-                company_code = '0000000'  # デフォルト値
-            else:
-                validate_company_code(company_code)
+            # カード発行会社コードは固定値
+            company_code = '7130754'
 
             # 入力テキストのパース
             try:
