@@ -16,8 +16,12 @@ dist/
 # テスト出力
 test_*.txt
 
-# ただしREADME.txtは除外しない
+# ただしREADME.txtとBUILD_MANUAL.txtは除外しない
 !README.txt
+!BUILD_MANUAL.txt
+
+# ビルドログ
+build_log.txt
 
 # 一時ファイル
 *.tmp

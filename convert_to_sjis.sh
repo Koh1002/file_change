@@ -16,6 +16,9 @@ echo ""
 FILES=(
     "build_exe.bat"
     "build_exe_simple.bat"
+    "build_exe_debug.bat"
+    "test_bat.bat"
+    "BUILD_MANUAL.txt"
 )
 
 # 各ファイルを変換
