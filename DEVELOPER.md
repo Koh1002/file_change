@@ -17,16 +17,18 @@
 
 ```
 .
-├── app.py                # GUIアプリケーション本体
-├── formatter.py          # 固定長整形ロジック
-├── models.py            # レコード定義（フィールド長、固定値等）
-├── utils.py             # 入力パース、バリデーション、ファイル書き込み
-├── test_formatter.py    # テストスクリプト
-├── build_exe.bat        # Windowsビルドスクリプト
-├── build_exe.sh         # Linux/Macビルドスクリプト
-├── requirements.txt     # 依存パッケージ
-├── README.txt          # 利用者向けマニュアル
-└── DEVELOPER.md        # 開発者向けドキュメント（このファイル）
+├── app.py                 # GUIアプリケーション本体
+├── formatter.py           # 固定長整形ロジック
+├── models.py             # レコード定義（フィールド長、固定値等）
+├── utils.py              # 入力パース、バリデーション、ファイル書き込み
+├── test_formatter.py     # テストスクリプト
+├── build_exe.bat         # Windowsビルドスクリプト（標準）
+├── build_exe_simple.bat  # Windowsビルドスクリプト（簡易版・初心者向け）
+├── build_exe.sh          # Linux/Macビルドスクリプト
+├── requirements.txt      # 依存パッケージ
+├── README.txt           # 利用者向けマニュアル
+├── DEVELOPER.md         # 開発者向けドキュメント（このファイル）
+└── .gitignore           # Git除外設定
 ```
 
 ## 開発環境のセットアップ
@@ -81,12 +83,23 @@ python test_formatter.py
 
 ## ビルド
 
-### 自動ビルド
+### 自動ビルド（推奨）
 
-**Windows:**
+**Windows（初心者向け）:**
+```cmd
+build_exe_simple.bat
+```
+- 詳細なステップバイステップガイド付き
+- エラーメッセージが分かりやすい
+- 管理者権限での実行を推奨
+
+**Windows（標準）:**
 ```cmd
 build_exe.bat
 ```
+- Pythonの自動検出（python/py）
+- エラー時の詳細な原因と解決策を表示
+- ダブルクリックで実行可能
 
 **Linux/Mac:**
 ```bash
@@ -100,6 +113,20 @@ pyinstaller --onefile --noconsole --name "固定長テキスト変換ツール" 
 ```
 
 ビルド成果物は `dist/` ディレクトリに生成されます。
+
+### ビルドのトラブルシューティング
+
+**問題: ウィンドウが一瞬で閉じる**
+- 解決策: `build_exe_simple.bat` を使用する
+
+**問題: Pythonが見つからない**
+- 解決策: PATHの設定を確認、コンピュータを再起動
+
+**問題: 仮想環境の作成に失敗**
+- 解決策: 管理者権限で実行、venvフォルダを削除して再実行
+
+**問題: ビルドに失敗**
+- 解決策: build、dist、venvフォルダを削除して再実行
 
 ## アーキテクチャ
 
