@@ -1,0 +1,185 @@
+================================================================================
+  Fixed-length Text Converter - Build Guide (English)
+================================================================================
+
+This guide provides simple instructions to build the EXE file.
+All batch files are in English to avoid character encoding issues.
+
+
+STEP 1: Test Batch File
+================================================================================
+
+First, verify that batch files work correctly on your system.
+
+1. Double-click "test_simple.bat"
+
+2. A window should open with this message:
+   ========================================
+   Simple Test - Batch File and Python
+   ========================================
+
+3. If you see Python version information, the test is successful.
+
+RESULT:
+  - Window opens and shows messages → Go to STEP 2
+  - Window closes immediately → Go to STEP 3 (Manual Method)
+
+
+STEP 2: Build with English Script
+================================================================================
+
+Use the English-only build script.
+
+1. Double-click "build_exe_en.bat"
+
+2. The window will stay open and show progress:
+   [1/4] Checking Python installation...
+   [2/4] Preparing virtual environment...
+   [3/4] Activating virtual environment...
+   [4/4] Installing PyInstaller...
+
+3. Wait for the build to complete (3-5 minutes)
+
+4. When successful, you will see:
+   ===============================================
+   Build completed successfully!
+   ===============================================
+
+   EXE file location:
+     ...\dist\FixedLengthConverter.exe
+
+5. The EXE file will be in the "dist" folder
+
+NOTE: The EXE filename is "FixedLengthConverter.exe"
+      You can rename it to anything you want.
+
+
+STEP 3: Manual Method (If batch files don't work)
+================================================================================
+
+If batch files don't work, use Command Prompt manually.
+
+1. Open the folder containing these files in Explorer
+
+2. Click the address bar (where the folder path is shown)
+
+3. Type "cmd" and press Enter
+   → Command Prompt will open in this folder
+
+4. Run these commands one by one:
+
+   Check Python:
+   -------------
+   python --version
+
+   (If that doesn't work, try: py --version)
+
+   Create virtual environment:
+   ---------------------------
+   python -m venv venv
+
+   (Or: py -m venv venv)
+
+   Activate virtual environment:
+   -----------------------------
+   venv\Scripts\activate
+
+   (You should see "(venv)" at the start of the prompt)
+
+   Install PyInstaller:
+   -------------------
+   pip install pyinstaller
+
+   Build EXE:
+   ---------
+   pyinstaller --onefile --noconsole --name FixedLengthConverter app.py
+
+   (Wait 3-5 minutes)
+
+5. Check the "dist" folder for FixedLengthConverter.exe
+
+
+TROUBLESHOOTING
+================================================================================
+
+Problem: "Python not found" error
+
+Solution:
+  1. Install Python 3.8 or later
+     https://www.python.org/downloads/
+
+  2. During installation, CHECK the box:
+     "Add Python to PATH"
+
+  3. Restart your computer after installation
+
+
+Problem: "Failed to create virtual environment"
+
+Solution:
+  1. Right-click the batch file
+  2. Select "Run as administrator"
+  3. Try again
+
+
+Problem: Internet connection error
+
+Solution:
+  1. Check your internet connection
+  2. Try again
+  3. If using a proxy, configure pip:
+     pip install --proxy http://proxy:port pyinstaller
+
+
+Problem: Build takes too long (more than 10 minutes)
+
+Solution:
+  1. Press Ctrl+C to cancel
+  2. Delete these folders:
+     - venv
+     - build
+     - dist
+  3. Run the build script again
+
+
+AFTER SUCCESSFUL BUILD
+================================================================================
+
+1. Open the "dist" folder
+
+2. You will find "FixedLengthConverter.exe"
+
+3. You can rename it. For example:
+   - Fixed-length Text Converter.exe
+   - TextConverter.exe
+   - Or any name you prefer
+
+4. Double-click the EXE to test it
+
+5. The GUI window should open
+
+6. Distribute this EXE file to users (no Python required)
+
+
+NOTES
+================================================================================
+
+- The EXE file is self-contained (no Python installation needed)
+- File size is approximately 15-20 MB
+- Antivirus software may flag it (this is normal for PyInstaller EXEs)
+- If antivirus blocks it, add it to the allowed list
+
+
+SUPPORT
+================================================================================
+
+If you encounter issues not covered in this guide:
+
+1. Check for error messages in the Command Prompt window
+2. Take a screenshot of any errors
+3. Contact the developer with:
+   - Screenshot of the error
+   - Your Windows version
+   - Python version (python --version output)
+
+================================================================================

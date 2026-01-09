@@ -16,9 +16,10 @@ dist/
 # テスト出力
 test_*.txt
 
-# ただしREADME.txtとBUILD_MANUAL.txtは除外しない
+# ただしREADME.txtとマニュアルは除外しない
 !README.txt
 !BUILD_MANUAL.txt
+!BUILD_GUIDE_EN.txt
 
 # ビルドログ
 build_log.txt
