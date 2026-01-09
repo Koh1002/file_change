@@ -255,6 +255,30 @@ def validate_card_number(card_number):
 - `write_shift_jis_file()` 関数で `newline=''` が指定されているか確認
 - 改行コードが `\r\n` で明示的に付加されているか確認
 
+**問題**: バッチファイル実行時に日本語が文字化けする
+
+**原因**:
+- Windowsのコマンドプロンプトは Shift_JIS (CP932) を使用
+- Linux/Mac で作成したファイルは UTF-8 で保存される
+- UTF-8のバッチファイルをWindowsで実行すると文字化けが発生
+
+**解決策**:
+- バッチファイルを Shift_JIS に変換する必要があります
+- 変換スクリプトを実行してください：
+  ```bash
+  ./convert_to_sjis.sh
+  ```
+- または、手動で変換：
+  ```bash
+  iconv -f UTF-8 -t CP932 build_exe.bat > build_exe_sjis.bat
+  mv build_exe_sjis.bat build_exe.bat
+  ```
+
+**重要な注意事項**:
+- バッチファイル(.bat)を編集した後は、必ず Shift_JIS に変換してからコミットしてください
+- Shift_JIS に変換されたファイルは、Linux/Mac のエディタで開くと文字化けして見える場合があります
+- 変換後のファイルは `file -i ファイル名` で charset=unknown-8bit と表示されます（これは正常です）
+
 ### GUI関連
 
 **問題**: tkinterが起動しない

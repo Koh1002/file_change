@@ -19,6 +19,9 @@ test_*.txt
 # ただしREADME.txtは除外しない
 !README.txt
 
+# 一時ファイル
+*.tmp
+
 # IDE
 .vscode/
 .idea/
