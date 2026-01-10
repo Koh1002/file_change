@@ -19,6 +19,7 @@ test_*.txt
 # ただしREADME.txtとマニュアルは除外しない
 !README.txt
 !BUILD_GUIDE_EN.txt
+!QUICK_START.txt
 
 # ビルドログ
 build_log.txt

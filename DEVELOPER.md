@@ -8,29 +8,56 @@
 ## 技術スタック
 
 - **Python**: 3.8以降
-- **GUI**: tkinter（標準ライブラリ）
+- **GUI**:
+  - 標準版: tkinter（標準ライブラリ）
+  - モダン版: CustomTkinter（追加パッケージ）
 - **ビルド**: PyInstaller
 - **文字コード**: Shift_JIS
 - **改行コード**: CRLF
+
+## バージョン
+
+### 標準版（app.py）
+- シンプルなtkinter UI
+- 追加パッケージ不要
+- 軽量（EXE: 約15-20MB）
+
+### モダン版（app_modern.py）⭐推奨
+- CustomTkinterによるモダンUI
+- Material Design風デザイン
+- ダークモード対応
+- CustomTkinterパッケージが必要
+- EXE: 約25-30MB
 
 ## ファイル構成
 
 ```
 .
-├── app.py                 # GUIアプリケーション本体
-├── formatter.py           # 固定長整形ロジック
-├── models.py             # レコード定義（フィールド長、固定値等）
-├── utils.py              # 入力パース、バリデーション、ファイル書き込み
-├── test_formatter.py     # テストスクリプト
-├── build_exe_en.bat      # Windowsビルドスクリプト（英語版）
-├── test_simple.bat       # バッチファイル動作テスト
-├── build_exe.sh          # Linux/Macビルドスクリプト
-├── convert_to_sjis.sh    # 文字コード変換スクリプト
-├── requirements.txt      # 依存パッケージ
-├── README.txt           # 利用者向けマニュアル
-├── BUILD_GUIDE_EN.txt   # ビルド手順書（英語版）
-├── DEVELOPER.md         # 開発者向けドキュメント（このファイル）
-└── .gitignore           # Git除外設定
+├── app.py                    # GUIアプリケーション本体（標準版）
+├── app_modern.py             # GUIアプリケーション本体（モダン版）⭐
+├── formatter.py              # 固定長整形ロジック
+├── models.py                # レコード定義（フィールド長、固定値等）
+├── utils.py                 # 入力パース、バリデーション、ファイル書き込み
+├── test_formatter.py        # テストスクリプト
+│
+├── run_app.bat              # 標準版起動スクリプト（開発用）
+├── run_modern.bat           # モダン版起動スクリプト（開発用）⭐
+│
+├── build_exe_en.bat         # 標準版ビルドスクリプト
+├── build_modern.bat         # モダン版ビルドスクリプト⭐
+├── build_exe.sh             # Linux/Macビルドスクリプト
+│
+├── test_simple.bat          # バッチファイル動作テスト
+├── convert_to_sjis.sh       # 文字コード変換スクリプト
+│
+├── requirements.txt         # 依存パッケージ（標準版）
+├── requirements_modern.txt  # 依存パッケージ（モダン版）
+│
+├── README.txt              # 利用者向けマニュアル
+├── BUILD_GUIDE_EN.txt      # ビルド手順書（英語版）
+├── QUICK_START.txt         # クイックスタートガイド⭐
+├── DEVELOPER.md            # 開発者向けドキュメント（このファイル）
+└── .gitignore              # Git除外設定
 ```
 
 ## 主要な設定
@@ -73,8 +100,32 @@ pip install -r requirements.txt
 
 ### アプリケーションの起動
 
+**簡単な方法（推奨）:**
+
+標準版:
+```cmd
+run_app.bat
+```
+
+モダン版（推奨）:
+```cmd
+run_modern.bat
+```
+
+**手動実行:**
+
+標準版:
 ```bash
 python app.py
+```
+
+モダン版:
+```bash
+# 初回のみ
+pip install customtkinter
+
+# 起動
+python app_modern.py
 ```
 
 ### テストの実行
@@ -94,21 +145,22 @@ python test_formatter.py
 
 ### 自動ビルド（推奨）
 
-**Windows（初心者向け）:**
+**標準版:**
 ```cmd
-build_exe_simple.bat
+build_exe_en.bat
 ```
-- 詳細なステップバイステップガイド付き
-- エラーメッセージが分かりやすい
-- 管理者権限での実行を推奨
+- 英語メッセージで確実に動作
+- 生成ファイル: `dist/FixedLengthConverter.exe`
+- サイズ: 約15-20MB
 
-**Windows（標準）:**
+**モダン版（推奨）:**
 ```cmd
-build_exe.bat
+build_modern.bat
 ```
-- Pythonの自動検出（python/py）
-- エラー時の詳細な原因と解決策を表示
-- ダブルクリックで実行可能
+- CustomTkinterを含む
+- 生成ファイル: `dist/FixedLengthConverter_Modern.exe`
+- サイズ: 約25-30MB
+- UIが綺麗で使いやすい
 
 **Linux/Mac:**
 ```bash
@@ -117,8 +169,15 @@ build_exe.bat
 
 ### 手動ビルド
 
+**標準版:**
 ```bash
-pyinstaller --onefile --noconsole --name "固定長テキスト変換ツール" app.py
+pyinstaller --onefile --noconsole --name FixedLengthConverter app.py
+```
+
+**モダン版:**
+```bash
+pip install customtkinter
+pyinstaller --onefile --noconsole --name FixedLengthConverter_Modern app_modern.py
 ```
 
 ビルド成果物は `dist/` ディレクトリに生成されます。
