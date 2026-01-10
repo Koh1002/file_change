@@ -64,7 +64,7 @@ REM Install dependencies
 echo [4/5] Installing dependencies...
 echo This may take a few minutes...
 echo.
-pip install customtkinter pyinstaller
+pip install customtkinter pyinstaller Pillow
 if errorlevel 1 (
     echo ERROR: Failed to install dependencies
     pause
@@ -84,7 +84,15 @@ REM Build EXE
 echo [5/5] Building EXE file...
 echo This will take 3-5 minutes. Please wait...
 echo.
-pyinstaller --onefile --noconsole --name FixedLengthConverter_Modern app_modern.py
+
+REM Check for icon file
+set ICON_PARAM=
+if exist icon.ico (
+    set ICON_PARAM=--icon=icon.ico
+    echo Using icon: icon.ico
+)
+
+pyinstaller --onefile --noconsole --name FixedLengthConverter_Modern %ICON_PARAM% app_modern.py
 if errorlevel 1 (
     echo ERROR: Build failed
     pause

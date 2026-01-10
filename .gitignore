@@ -20,6 +20,11 @@ test_*.txt
 !README.txt
 !BUILD_GUIDE_EN.txt
 !QUICK_START.txt
+!ICON_GUIDE.txt
+
+# アイコンファイル（プロジェクトに含める）
+!icon.png
+!icon.ico
 
 # ビルドログ
 build_log.txt

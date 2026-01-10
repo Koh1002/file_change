@@ -28,6 +28,18 @@ class FixedLengthConverterApp:
         self.root.title('固定長テキスト変換ツール')
         self.root.geometry('900x750')
 
+        # アイコンを設定（icon.icoまたはicon.pngがある場合）
+        try:
+            if os.path.exists('icon.ico'):
+                self.root.iconbitmap('icon.ico')
+            elif os.path.exists('icon.png'):
+                from PIL import Image, ImageTk
+                icon_image = Image.open('icon.png')
+                icon_photo = ImageTk.PhotoImage(icon_image)
+                self.root.iconphoto(True, icon_photo)
+        except Exception as e:
+            pass  # アイコンファイルがない場合はスキップ
+
         # タブビュー
         self.tabview = ctk.CTkTabview(self.root)
         self.tabview.pack(fill='both', expand=True, padx=20, pady=20)
@@ -46,14 +58,31 @@ class FixedLengthConverterApp:
         main_frame = ctk.CTkFrame(parent)
         main_frame.pack(fill='both', expand=True, padx=10, pady=10)
 
+        # ヘッダーフレーム（ロゴと説明）
+        header_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
+        header_frame.pack(fill='x', padx=10, pady=(10, 5))
+
+        # ロゴ画像（icon.pngがある場合）
+        try:
+            if os.path.exists('icon.png'):
+                from PIL import Image, ImageTk
+                logo_image = Image.open('icon.png')
+                logo_image = logo_image.resize((40, 40), Image.Resampling.LANCZOS)
+                logo_photo = ImageTk.PhotoImage(logo_image)
+                logo_label = ctk.CTkLabel(header_frame, image=logo_photo, text="")
+                logo_label.image = logo_photo  # 参照を保持
+                logo_label.pack(side='left', padx=(0, 10))
+        except Exception:
+            pass  # ロゴがない場合はスキップ
+
         # 説明ラベル
         info_label = ctk.CTkLabel(
-            main_frame,
+            header_frame,
             text='📝 カード番号,入金額 の形式で1行ずつ入力（カンマまたはタブ区切り、Excelからコピペ可）',
-            font=ctk.CTkFont(size=13),
+            font=ctk.CTkFont(size=14, weight='bold'),
             text_color=("#1f538d", "#3a7ebf")
         )
-        info_label.pack(pady=(10, 5), padx=10, anchor='w')
+        info_label.pack(side='left', fill='x', expand=True)
 
         # データ入力エリア
         input_frame = ctk.CTkFrame(main_frame)
@@ -64,7 +93,7 @@ class FixedLengthConverterApp:
             input_frame,
             width=800,
             height=400,
-            font=ctk.CTkFont(family="Consolas", size=12),
+            font=ctk.CTkFont(family="Consolas", size=13, weight='bold'),
             wrap='none'
         )
         text_area.pack(fill='both', expand=True, padx=10, pady=10)
@@ -80,7 +109,7 @@ class FixedLengthConverterApp:
             command=lambda: self.insert_sample(text_area),
             width=150,
             height=35,
-            font=ctk.CTkFont(size=13)
+            font=ctk.CTkFont(size=14, weight='bold')
         )
         sample_btn.pack(side='left', padx=5)
 
@@ -91,7 +120,7 @@ class FixedLengthConverterApp:
             command=lambda: text_area.delete('1.0', 'end'),
             width=120,
             height=35,
-            font=ctk.CTkFont(size=13),
+            font=ctk.CTkFont(size=14, weight='bold'),
             fg_color="#d32f2f",
             hover_color="#b71c1c"
         )
@@ -117,7 +146,7 @@ class FixedLengthConverterApp:
         status_label = ctk.CTkLabel(
             main_frame,
             text='💡 カード発行会社コード: 7130754（固定）',
-            font=ctk.CTkFont(size=12),
+            font=ctk.CTkFont(size=13, weight='bold'),
             text_color=("gray50", "gray70")
         )
         status_label.pack(pady=5, padx=10, anchor='w')

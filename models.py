@@ -78,10 +78,10 @@ DATA_RECORD_FIELDS = [
     Field(7, align='right', padding='0'), # 入金額/追加入金額（可変）
     Field(30, padding=' '),              # 端末番号
     Field(15, padding=' '),              # 端末処理番号
-    Field(3, fixed_value='998'),         # 固定値（項番7）
+    Field(16, align='right', padding=' ', fixed_value='100000998'), # 固定値（項番7）
     Field(1, fixed_value='2'),           # 固定値（項番8）
     Field(4, fixed_value='A102'),        # 固定値（項番9）
-    Field(171, padding=' '),             # ダミー（残り）
+    Field(158, padding=' '),             # ダミー（残り）254桁に調整
 ]
 
 
